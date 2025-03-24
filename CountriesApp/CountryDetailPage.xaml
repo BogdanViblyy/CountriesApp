@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CountriesApp.CountryDetailPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <VerticalStackLayout Padding="10">
+        <Label x:Name="countryNameLabel" FontSize="18" />
+        <Label x:Name="countryPopulationLabel" FontSize="18" />
+        <Image x:Name="countryFlagImage" HeightRequest="100" />
+    </VerticalStackLayout>
+</ContentPage>

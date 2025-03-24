@@ -1,25 +1,57 @@
-﻿namespace CountriesApp
+﻿using Microsoft.Maui.Controls;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+namespace CountriesApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private CountryViewModel viewModel;
 
         public MainPage()
         {
             InitializeComponent();
+            viewModel = new CountryViewModel();
+            BindingContext = viewModel;
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        // Handler for adding a country
+        private void OnAddCountryClicked(object sender, EventArgs e)
         {
-            count++;
+            var country = new Country
+            {
+                Name = "France",
+                Capital = "Paris",
+                Population = 67000000,
+                Flag = "france_flag.png" // Set a valid image path
+            };
+            viewModel.AddCountry(country);
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        // Handler for removing a country
+        private void OnRemoveCountryClicked(object sender, EventArgs e)
+        {
+            if (viewModel.SelectedCountry != null)
+            {
+                viewModel.RemoveCountry(viewModel.SelectedCountry);
+            }
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        // Handler for updating country details
+        private void OnUpdateCountryClicked(object sender, EventArgs e)
+        {
+            if (viewModel.SelectedCountry != null)
+            {
+                var updatedCountry = new Country
+                {
+                    Name = viewModel.SelectedCountry.Name,
+                    Capital = "Updated Capital",
+                    Population = 75000000,
+                    Flag = "updated_flag.png" // Set a valid image path
+                };
+                viewModel.UpdateCountry(updatedCountry);
+            }
         }
     }
-
 }
